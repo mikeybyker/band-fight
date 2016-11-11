@@ -1,0 +1,17 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "rest api proxy",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Mike",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.1",
+    "express": "*",
+    "node-rest-client": "^2.0.1",
+    "request": "*"
+  }
+}

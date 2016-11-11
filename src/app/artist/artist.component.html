@@ -1,0 +1,10 @@
+<div class="image" *ngIf="artist" [ngClass]="getClass()">
+  <button (click)="onRemove(artist)" [disabled]="position !== 0">
+    <img src="{{artist?.image.extralarge}}" alt="">
+  </button>
+</div>
+<div class="content">
+  <div class="header">
+    {{artist?.name}}
+  </div>
+</div>
