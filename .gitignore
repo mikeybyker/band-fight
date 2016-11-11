@@ -29,6 +29,7 @@ testem.log
 key.txt
 
 # e2e
+/e2e
 /e2e/*.js
 /e2e/*.map
 
