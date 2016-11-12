@@ -211,7 +211,6 @@ export class ArtistListComponent implements OnInit {
         this.subject3.next(artist);
       });
 
-    //@todo : don't think share needed here
     this.artist1$ = view
       .filter(({button, artist}) => button === 1)
       .map(({button, artist}) => artist);
@@ -231,7 +230,7 @@ export class ArtistListComponent implements OnInit {
     // Once all images shown, this completes, and unpauses subscription to click/counter
     view
       .subscribe(({button, artist}) => {
-        console.log('View : ', { button, artist });
+        // console.log('View : ', { button, artist });
       }, this.noop, () => {
         console.log('View complete');
         pauser.next(false);
@@ -259,7 +258,7 @@ export class ArtistListComponent implements OnInit {
     removeAny
       .distinctUntilChanged() // safety : won't let the same artist come through (...as we can't complete, that prevents final update)
       .subscribe((removedArtist) => {
-        console.log('Removed : ', removedArtist.name)
+        // console.log('Removed : ', removedArtist.name)
         // this.updateRemaining(removedArtist);
         this.updateRemoved(removedArtist);
       });
@@ -268,7 +267,7 @@ export class ArtistListComponent implements OnInit {
     pickAny
       .skipUntil(pausable)
       .subscribe((removedArtist) => {
-        console.log('Picked : ', removedArtist.name)
+        // console.log('Picked : ', removedArtist.name)
         // this.updateRemaining(removedArtist);
         this.updateRemoved(removedArtist);
       });
@@ -286,12 +285,18 @@ export class ArtistListComponent implements OnInit {
       isSecond = p === 2,
       isThird = p === 3;
 
+    // If moved, can animate - just for a laugh
+    let hasMoved = false;
+    if ((id === 1 && !isSecond) || (id === 2 && !isWinner) || (id === 3 && !isThird)) {
+      hasMoved = true;
+    }
     let classes: any = {
       'col-xs-4': !this.complete,
       'col-xs-3': this.complete && !isWinner,
       'col-xs-6': this.complete && isWinner,
-      'flex-xs-last': this.complete && isThird,  // move 3rd choice to last slot
-      'flex-xs-first': this.complete && isSecond // move 2nd choice to first slot
+      'flex-xs-last': this.complete && isThird,    // move 3rd choice to last slot
+      'flex-xs-first': this.complete && isSecond,  // move 2nd choice to first slot
+      'anim': this.complete && hasMoved
     };
     return classes;
   }
