@@ -87,7 +87,7 @@ export class ArtistListComponent implements OnInit {
       .flatMap((artist) => artist)
       .filter((artist) => !!artist.id)
       .distinct((x, y) => { return x.id === y.id; })
-      .take(50).share(); // ** Must share to that the remainingList is the same
+      .take(50).share(); // ** Must share so that the remainingList is the same
 
     // Create a list to update as artists are dismissed : This is for debug use
     /*this.distinct
