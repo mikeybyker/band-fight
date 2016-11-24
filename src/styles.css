@@ -79,7 +79,6 @@ body
     padding: .75rem;
     margin-bottom: 2rem;
 }
-
 .card a,
 .card button,
 {
@@ -90,7 +89,14 @@ body
 {
   font-size: 85%;
 }
-
+.cards 
+{
+  visibility: hidden;
+}
+.cards.active
+{
+  visibility: visible;
+}
 .cards .card .image img
 {
   width: 100%;

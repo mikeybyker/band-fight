@@ -19,7 +19,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
 ### Version
-0.1.0
+0.1.1
 
 #### For direct api access, add your [Last.fm](http://www.last.fm/api/account/create) API key to environments/environment.ts
 #### If you prefer to use a proxy, then the API key can be added to server/index.js and hosted wherever you like - update the end point in environments/environment.ts

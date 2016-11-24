@@ -1,6 +1,6 @@
 {
   "name": "band-fight",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "description": "A random bunch of artists are displayed 3 at a time - dismiss your least favourite by clicking them. Keep on going until you reach the last one. The winner!",
   "author": "mikeybyker+github@gmail.com",

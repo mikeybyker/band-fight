@@ -271,6 +271,15 @@ export class ArtistListComponent implements OnInit {
         // this.updateRemaining(removedArtist);
         this.updateRemoved(removedArtist);
       });
+
+    // Preload images - bit more speedy
+    this.distinct
+      .subscribe((artist) => {
+        if (artist.image && artist.image.extralarge) {
+          let image = new Image()
+          image.src = artist.image.extralarge
+        }
+      });
   }
 
   /**

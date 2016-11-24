@@ -1,7 +1,6 @@
 <div class="album text-muted">
   <div class="container">
-
-    <div class="row cards">
+    <div class="row cards" [class.active]="(artist1$ | async)?.name">
       <div class="col-xs-4" [ngClass]="setClasses(1)">
         <app-artist id="option1" class="card" (winner)="onWinner($event)" [artist]="artist1$ | async" (remove)="removeSlot1.next($event)"
           [position]="positions[1]">
