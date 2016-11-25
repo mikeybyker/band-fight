@@ -27,6 +27,7 @@ testem.log
 /typings
 /removed
 key.txt
+cleaner.bat
 
 # e2e
 /e2e
