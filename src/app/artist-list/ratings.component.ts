@@ -5,11 +5,15 @@ import { Artist } from '../lastfm.service';
   selector: 'ratings',
   template: `
     <ol>
-      <li *ngFor="let artist of list; trackBy:artist?.id">{{artist.name}}</li>
+      <li *ngFor="let artist of list; trackBy:trackByFn">{{artist.name}}</li>
     </ol>
   `
 })
 export class Ratings {
   @Input()
   list: Artist[];
+
+  trackByFn(index, artist) {
+    return artist.id;
+  }
 }
