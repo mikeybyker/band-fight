@@ -86,7 +86,8 @@ export class ArtistListComponent implements OnInit {
       })
       .flatMap((artist) => artist)
       .filter((artist) => !!artist.id)
-      .distinct((x, y) => { return x.id === y.id; })
+      // .distinct((x, y) => { return x.id === y.id; })
+      .distinct((x) => { return x.id; })
       .take(50).share(); // ** Must share so that the remainingList is the same
 
     // Create a list to update as artists are dismissed : This is for debug use
@@ -130,7 +131,7 @@ export class ArtistListComponent implements OnInit {
   /**
    * Notified by the winning artist
    */
-  onWinner({artist}) {
+  onWinner({ artist }) {
     console.log('And the winner is...  ', artist.name);
     // this.updateRemaining(artist);
     this.updateRemoved(artist);
@@ -165,7 +166,7 @@ export class ArtistListComponent implements OnInit {
 
     // ReplaySubject to allow the subscribers to get the intial item
     const view: ReplaySubject<any> = new ReplaySubject(1);
-    // For each click, zip with distinct to get each article in turn.
+    // For each click, zip with distinct to get each artist in turn.
     const viewer: Observable<RankData> = anyButton$
       .zip(this.distinct, (button, artist) => {
         return { button, artist };
@@ -212,14 +213,14 @@ export class ArtistListComponent implements OnInit {
       });
 
     this.artist1$ = view
-      .filter(({button, artist}) => button === 1)
-      .map(({button, artist}) => artist);
+      .filter(({ button, artist }) => button === 1)
+      .map(({ button, artist }) => artist);
     this.artist2$ = view
-      .filter(({button, artist}) => button === 2)
-      .map(({button, artist}) => artist);
+      .filter(({ button, artist }) => button === 2)
+      .map(({ button, artist }) => artist);
     this.artist3$ = view
-      .filter(({button, artist}) => button === 3)
-      .map(({button, artist}) => artist);
+      .filter(({ button, artist }) => button === 3)
+      .map(({ button, artist }) => artist);
 
     // removeAny: subscribe during the click-to-dismiss part (once all artists have been displayed, this completes)
     const removeAny: Observable<Artist> = this.subject1.merge(this.subject2, this.subject3);
@@ -229,7 +230,7 @@ export class ArtistListComponent implements OnInit {
 
     // Once all images shown, this completes, and unpauses subscription to click/counter
     view
-      .subscribe(({button, artist}) => {
+      .subscribe(({ button, artist }) => {
         // console.log('View : ', { button, artist });
       }, this.noop, () => {
         console.log('View complete');
@@ -237,14 +238,14 @@ export class ArtistListComponent implements OnInit {
       });
 
     thirdPlace
-      .subscribe(({count, button}) => {
+      .subscribe(({ count, button }) => {
         // console.log('thirdPlace : ', { count, button });
         this.onPlace(button, 3);
       }, this.noop, () => {
         // console.log('thirdPlace complete');
       });
     secondPlace
-      .subscribe(({count, button}) => {
+      .subscribe(({ count, button }) => {
         // console.log('secondPlace : ', { count, button });
         this.onPlace(button, 2);
         const win = this.winnerPosition(this.positions);
@@ -287,7 +288,7 @@ export class ArtistListComponent implements OnInit {
    */
   setClasses(id) {
     if (!this.complete) {
-      return { 'col-xs-4': true };
+      return { 'col-sm-4': true };
     }
     const p = this.positions[id],
       isWinner = p === 1,
@@ -300,11 +301,11 @@ export class ArtistListComponent implements OnInit {
       hasMoved = true;
     }
     let classes: any = {
-      'col-xs-4': !this.complete,
-      'col-xs-3': this.complete && !isWinner,
-      'col-xs-6': this.complete && isWinner,
-      'flex-xs-last': this.complete && isThird,    // move 3rd choice to last slot
-      'flex-xs-first': this.complete && isSecond,  // move 2nd choice to first slot
+      'col-sm-4': !this.complete,
+      'col-sm-3': this.complete && !isWinner,
+      'col-sm-6': this.complete && isWinner,
+      'flex-sm-last': this.complete && isThird,    // move 3rd choice to last slot
+      'flex-sm-first': this.complete && isSecond,  // move 2nd choice to first slot
       'anim': this.complete && hasMoved
     };
     return classes;

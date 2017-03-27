@@ -1,25 +1,29 @@
 <div class="album text-muted">
   <div class="container">
     <div class="row cards" [class.active]="(artist1$ | async)?.name">
-      <div class="col-xs-4" [ngClass]="setClasses(1)">
-        <app-artist id="option1" class="card" (winner)="onWinner($event)" [artist]="artist1$ | async" (remove)="removeSlot1.next($event)"
-          [position]="positions[1]">
+      <div class="col-sm-4 " [ngClass]="setClasses(1) ">
+        <app-artist id="option1 " class="card " (winner)="onWinner($event) " [artist]="artist1$ | async " (remove)="removeSlot1.next($event) "
+          [position]="positions[1] ">
         </app-artist>
       </div>
-      <div class="col-xs-4" [ngClass]="setClasses(2)">
-        <app-artist id="option2" class="card" (winner)="onWinner($event)" [artist]="artist2$ | async" (remove)="removeSlot2.next($event)"
-          [position]="positions[2]">
+      <div class="col-sm-4 " [ngClass]="setClasses(2) ">
+        <app-artist id="option2 " class="card " (winner)="onWinner($event) " [artist]="artist2$ | async " (remove)="removeSlot2.next($event) "
+          [position]="positions[2] ">
         </app-artist>
       </div>
-      <div class="col-xs-4" [ngClass]="setClasses(3)">
-        <app-artist id="option3" class="card" (winner)="onWinner($event)" [artist]="artist3$ | async" (remove)="removeSlot3.next($event)"
-          [position]="positions[3]">
+      <div class="col-sm-4 " [ngClass]="setClasses(3) ">
+        <app-artist id="option3 " class="card " (winner)="onWinner($event) " [artist]="artist3$ | async " (remove)="removeSlot3.next($event) "
+          [position]="positions[3] ">
         </app-artist>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-12" *ngIf="complete">
+    <div *ngIf="artists | async; else loading">
+    </div>
+    <ng-template #loading>Loading artist pool...</ng-template>
+
+    <div class="row ">
+      <div class="col-sm-12 " *ngIf="complete ">
         <h3>Your Ratings</h3>
         <ratings [list]='removedList'></ratings>
       </div>

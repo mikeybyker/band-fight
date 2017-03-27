@@ -102,9 +102,9 @@ body
   width: 100%;
 }
 
-.flex-xs-first.anim,
-.flex-xs-last.anim,
-.col-xs-6.anim
+.flex-sm-first.anim,
+.flex-sm-last.anim,
+.col-sm-6.anim
 {
   transition: all 0.4s ease;
 }
